@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir ma liste{% endblock %}
+
+{% block body %}
+
+    {% if app.user %}
+    <h1>Ma liste</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Contenu</th>
+                <th>Statut</th>
+                {% if app.user %}
+                <th>Actions</th>
+                {% else %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for to_do_list in to_do_lists %}
+            <tr>
+                <td>{{ to_do_list.id }}</td>
+                <td>{{ to_do_list.content }}</td>
+                <td>{{ to_do_list.statut }}</td>
+                {% if app.user %}
+                <td>
+                    <a href="{{ path('app_to_do_list_show', {'id': to_do_list.id}) }}">Voir</a>
+                    <a href="{{ path('app_to_do_list_edit', {'id': to_do_list.id}) }}">Modifier</a>
+                </td>
+                {% else %}
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="no-connect">
+            <div class="no-connect-titles">
+                <h1>Bienvenue sur notre site de listes de choses à faire !</h1>
+                <h3>Inscrivez-vous ou connectez-vous pour pouvoir voir et gérer votre liste de choses à faire.</h3>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

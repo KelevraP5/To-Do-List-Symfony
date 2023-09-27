@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma tâche {{ to_do_list.statut }} : {{ to_do_list.content }}{% endblock %}
+
+{% block body %}
+    <h1>Une tâche {{ to_do_list.statut }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ to_do_list.id }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ to_do_list.content }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ to_do_list.statut }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('to_do_list/_delete_form.html.twig') }}
+{% endblock %}
